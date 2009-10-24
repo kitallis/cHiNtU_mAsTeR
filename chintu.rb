@@ -1,4 +1,5 @@
-# Chintu's purpose in life is to remain single. Be small, stay compressed, as a working hack, although making sure that he is nicely expandable if needed for solving multiple problems later on. 
+# Chintu's purpose in life is to remain single. Be small, stay compressed, as a working hack, although
+# making sure that he is nicely expandable if needed for solving multiple problems later on. 
 #
 # He is usually a bit shy. He does get a little verbose when you annoy him too much. But that's okay.
 # He's rumoured to have been heavily inspired by pie-man's values in life.
@@ -7,10 +8,13 @@
 #        <pie-man> : What's up, Chintu.
 #  <chintu_master> : hey pie-man.
 #  <chintu_master> : pie-man, nt yoozing auto-complete?
-#        <pie-man> : No. I fear that I might auto-complete the wrong user-name and ping someone else for no reason.
+#        <pie-man> : No. I fear that I might auto-complete the wrong user-name and ping someone else for
+#                    no reason.
 #  <chintu_master> : ah, that iz gud thinking.
-#  <chintu_master> : but nosrsly, i love ur values and ur perfection of living, i wish i wuz as awesome as you.
-#        <pie-man> : It's not about being awesome. It is about being perfect and not doing _anything_ wrong.
+#  <chintu_master> : but nosrsly, i love ur values and ur perfection of living, i wish i wuz as awesome 
+#                    as you.
+#        <pie-man> : It's not about being awesome. It is about being perfect and not doing _anything_ 
+#                    wrong.
 #  <chintu_master> : i c what you mean.
 
 TEMPLATE = <<EOS
@@ -159,8 +163,8 @@ def self.dirCreate;Dir.mkdir(C);A[C]
 ['themes','posts','out'].map{|a|puts"Creating /%s"%a;Dir.mkdir(a)}end
 def self.fileCreate ;B['blog.yaml',DY];B['themes/style.css',DS]
 B['themes/index.html',TEMPLATE.gsub(/^  /, '')]end 
-def self.writeStatic ;Dir["themes/*css"].each{|file|B["#{Misc.slug(file,"themes/")}",File.read(file)]}end
-end;class Metadata < Hash;protected;attr_accessor :DELIM;DELIM = /\A\s*\+-----\+(.+?)\+-----\+/m 
+def self.writeStatic ;Dir["themes/*css"].each{|file|B["#{Misc.slug(file,"themes/")}",File.read(file)]}
+end end;class Metadata < Hash;protected;attr_accessor :DELIM;DELIM = /\A\s*\+-----\+(.+?)\+-----\+/m 
 def self.parse(str) if str =~ DELIM;$1.strip.split("\n").inject(Metadata.new){
 |meta, line|k,v = line.split(":", 2);meta[k.strip.to_sym] = v.strip;meta}
 else Metadata.new end end end;class Post < Metadata;@@post = "";def self.parse(str) 
@@ -172,4 +176,4 @@ files = Dir["posts/*.post"].each{|file| test(?f, file)};html = ERB.new(TEMPLATE)
 files.each{|file| content = File.read(file);meta = Metadata.parse(content)
 parse_meta = Template.new(meta);post = Post.parse(content);puts "Posting " + "#{file}" + "\n"
 B["#{Misc.slug(file,"posts/")}.html",html.result(parse_meta.get_binding{post})]}end end
-if __FILE__ == $0 ;if ARGV[0] == "--compile" then Spit.main else Setup.dirCreate;Setup.fileCreate end end
+if __FILE__ == $0 ;if ARGV[0]=="--compile"then Spit.main else Setup.dirCreate;Setup.fileCreate end end
